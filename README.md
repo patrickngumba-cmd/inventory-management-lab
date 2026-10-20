@@ -5,35 +5,34 @@ A Flask REST API and interactive Command-Line Interface (CLI) for managing retai
 ## Installation and Setup Instructions
 
 1. Clone the repository and navigate to the project folder:
-   ```bash
-   git clone <your-github-repo-url>
+   bash
+   git clone https://github.com/patrickngumba-cmd/inventory-management-lab.git
    cd inventory-management-lab
-   ```
 
 2. Create and activate a virtual environment:
-   ```bash
+   bash
    python -m venv venv
    .\venv\Scripts\Activate.ps1
-   ```
+   
 
 3. Install the required packages:
-   ```bash
+   bash
    pip install flask requests pytest
-   ```
+   
 
 ## Running the Application
 
 1. Start the Flask server in your first terminal window:
-   ```bash
+   bash
    python app.py
-   ```
+   
    The API will run at `http://127.0.0.1:5000`.
 
 2. Open a second terminal window, activate the virtual environment, and run the CLI:
-   ```bash
+   bash
    .\venv\Scripts\Activate.ps1
    python cli.py
-   ```
+   
 
 ## API Endpoint Details
 
@@ -50,8 +49,8 @@ A Flask REST API and interactive Command-Line Interface (CLI) for managing retai
 
 When you run `python cli.py`, an interactive menu appears:
 
-```text
-=== Supermarket Inventory CLI ===
+text
+ Supermarket Inventory CLI 
 1. View Inventory
 2. Add New Item
 3. Update Price or Stock
@@ -66,11 +65,11 @@ ID: 2 | KCC Gold Crown Fresh Milk 500ml (New KCC) | Barcode: 6161101650012 | Pri
 ID: 3 | Ketepa Pride Tea Bags 100s (Ketepa) | Barcode: 6161100040012 | Price: KES 280.00 | Stock: 35
 ```
 
-**Adding an item (Option 2):**
-```text
+Adding an item (Option 2):
+text
 Choose an option (1-6): 2
 
---- Add Product ---
+ Add Product 
 Enter barcode (or press Enter to skip): 3017620422003
 Enter product name (or press Enter to fetch from barcode): 
 Enter price in KES (e.g. 150): 450
@@ -82,7 +81,7 @@ Added: Nutella (ID: 4)
 ```text
 Choose an option (1-6): 3
 
---- Update Product ---
+- Update Product -
 Enter item ID to update: 1
 Enter new price in KES (press Enter to skip): 220
 Enter new stock count (press Enter to skip): 45
@@ -92,6 +91,5 @@ Updated ID 1 -> Price: KES 220.00, Stock: 45
 ## Running Unit Tests
 
 To run the automated unit tests for the API routes, external API mocking, and CLI functions[cite: 18]:
-```bash
+bash
 pytest
-```
