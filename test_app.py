@@ -92,3 +92,23 @@ def test_cli_view_items(mock_get, capsys):
     captured = capsys.readouterr()
     assert "Jogoo Maize Meal" in captured.out
     assert "KES 210.00" in captured.out
+
+# 7. Test external API search helper route
+@patch("app.requests.get")
+def test_search_external_api_route(mock_get, client):
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+    mock_response.json.return_value = {
+        "status": 1,
+        "product": {
+            "product_name": "KCC Butter 250g",
+            "brands": "New KCC",
+            "ingredients_text": "Pasteurized cream, salt"
+        }
+    }
+    mock_get.return_value = mock_response
+
+    response = client.get("/inventory/search?barcode=6161101650099")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["product_name"] == "KCC Butter 250g"
