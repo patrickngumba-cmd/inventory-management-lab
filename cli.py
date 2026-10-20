@@ -133,6 +133,26 @@ def search_openfoodfacts():
             print("Brand:      ", info.get("brands"))
             print("Barcode:    ", info.get("barcode"))
             print("Ingredients:", info.get("ingredients_text"))
+
+            save_choice = input("\nAdd this item to inventory? (y/n): ").strip().lower()
+            if save_choice == "y":
+                try:
+                    price = float(input("Enter price in KES: ").strip())
+                    stock = int(input("Enter stock quantity: ").strip())
+                    new_item = {
+                        "barcode": info.get("barcode"),
+                        "product_name": info.get("product_name"),
+                        "brands": info.get("brands"),
+                        "ingredients_text": info.get("ingredients_text"),
+                        "price": price,
+                        "stock": stock
+                    }
+                    post_resp = requests.post(API_URL, json=new_item)
+                    if post_resp.status_code == 201:
+                        added = post_resp.json()
+                        print(f"Successfully added '{added['product_name']}' to inventory with ID {added['id']}!")
+                except ValueError:
+                    print("Invalid number entered for price or stock.")
         else:
             print("Product not found on OpenFoodFacts.")
     except requests.ConnectionError:
